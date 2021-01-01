@@ -1,9 +1,13 @@
 import React from 'react';
+import Router from './Router';
+import Navbar from './Shared/Navbar';
+
 
 function App() {
   return (
     <div>
-     0 down
+      <Navbar/>
+      <Router/>
     </div>
   );
 }
