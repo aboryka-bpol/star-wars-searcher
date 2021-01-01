@@ -1,1 +1,1 @@
-export * as PlanetDetails from './PlanetDetails';
+export { default } from './PlanetDetails';

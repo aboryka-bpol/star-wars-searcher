@@ -1,1 +1,1 @@
-export * as Spacies from './Species';
+export { default } from './Species';

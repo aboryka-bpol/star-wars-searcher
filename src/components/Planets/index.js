@@ -1,1 +1,1 @@
-export * as Plantes from './Planets';
+export { default }from './Planets';

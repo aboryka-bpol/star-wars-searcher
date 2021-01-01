@@ -1,3 +1,1 @@
-import Vehicles from "./Vehicles";
-
-export * as Vehicles from './Vehicles';
+export { default } from './Vehicles';

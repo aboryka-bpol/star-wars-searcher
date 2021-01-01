@@ -1,3 +1,1 @@
-import SpaceshipDetails from "./SpaceshipDetails";
-
-export * as SpaceshipDetails from './SpaceshipDetails';
+export { default } from './SpaceshipDetails';

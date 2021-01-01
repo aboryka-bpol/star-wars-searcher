@@ -1,3 +1,1 @@
-import Searchbar from "./Searchbar";
-
-export * as Searchbar from './Searchbar';
+export { default } from './Searchbar';

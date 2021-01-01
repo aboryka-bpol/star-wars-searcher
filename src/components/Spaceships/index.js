@@ -1,1 +1,1 @@
-export * as Spaceships from './Spaceships';
+export { default } from './Spaceships';

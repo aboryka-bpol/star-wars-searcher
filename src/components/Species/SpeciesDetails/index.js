@@ -1,1 +1,1 @@
-export * from './SpaciesDetails';
+export { default } from './SpaciesDetails';
