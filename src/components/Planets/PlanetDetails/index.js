@@ -1,0 +1,1 @@
+export * as PlanetDetails from './PlanetDetails';
