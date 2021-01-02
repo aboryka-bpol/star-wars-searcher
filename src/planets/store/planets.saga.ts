@@ -12,22 +12,16 @@ function* fetchPlanets(action: actions.IFetchPlanets) {
         search
     );
 
-    const mappedResults = results.reduce(
-        (acc: IPlanet[],
-        result: Partial<IPlanet[]> & { rotation_period: number, orbital_period: number, surface_water: number }): IPlanet[] => {
-        
-        const { rotation_period: rotationPeriod, orbital_period: orbitalPeriod, surface_water: surfaceWater } = result;
-
-        return [
-            ...acc,
-            {
-                ...result,
-                rotationPeriod,
-                orbitalPeriod,
-                surfaceWater
-            }
-        ]
-    }, []);
+    const mappedResults = results.map(
+        (result: Partial<IPlanet[]> & { rotation_period: number, orbital_period: number, surface_water: number }): IPlanet => {
+        const { rotation_period: rotationPeriod, orbital_period: orbitalPeriod, surface_water: surfaceWater, ...rest } = result;
+        return {
+            ...rest,
+            rotationPeriod,
+            orbitalPeriod,
+            surfaceWater
+        }
+    });
 
     yield put(actions.fetchPlanetsSuccess(mappedResults, previous, next))
 
