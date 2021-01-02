@@ -2,11 +2,15 @@ import { IPlanet } from "../interfaces/planet.interface";
 import { PlanetsAction, PlanetsActionTypes } from "./planets.actions";
 
 export interface PlanetsState {
-    planets: IPlanet[]
+    planets: IPlanet[],
+    hasNextPage: boolean,
+    hasPrevPage: boolean
 }
 
 const initialState: PlanetsState = {
-    planets: []
+    planets: [],
+    hasPrevPage: false,
+    hasNextPage: true
 }
 
 const reducer = (state = initialState, action: PlanetsAction) => {
@@ -16,9 +20,12 @@ const reducer = (state = initialState, action: PlanetsAction) => {
                 ...state
             }
         case PlanetsActionTypes.FETCH_PLANETS_SUCCESS:
+            const { planets, prev, next } = action.payload;
             return {
                 ...state,
-                planets: action.payload
+                planets,
+                hasPrevPage: !!prev ,
+                hasNextPage: !!next 
             }
         default:
             return state;

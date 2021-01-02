@@ -6,24 +6,31 @@ export enum PlanetsActionTypes {
 }
 
 export interface IFetchPlanets {
-    type: typeof PlanetsActionTypes.FETCH_PLANETS
+    type: typeof PlanetsActionTypes.FETCH_PLANETS,
+    payload: {page: number, search: string}
 }
 
 export interface IFetchPlanetsSuccess {
     type: typeof PlanetsActionTypes.FETCH_PLANETS_SUCCESS,
-    payload: IPlanet[]
+    payload: {planets: IPlanet[], prev: string, next: string}
 }
 
-export const fetchPlanets = (): IFetchPlanets => {
+
+export const fetchPlanets = (page: number, search: string): IFetchPlanets => {
     return {
-        type: PlanetsActionTypes.FETCH_PLANETS
+        type: PlanetsActionTypes.FETCH_PLANETS,
+        payload: {page, search},
     }
 }
 
-export const fetchPlanetsSuccess = (planets: IPlanet[]): IFetchPlanetsSuccess => {
+export const fetchPlanetsSuccess = (planets: IPlanet[], prev: string, next: string): IFetchPlanetsSuccess => {
     return {
         type: PlanetsActionTypes.FETCH_PLANETS_SUCCESS,
-        payload: planets
+        payload: {
+            planets,
+            prev,
+            next
+        }
     }
 }
 

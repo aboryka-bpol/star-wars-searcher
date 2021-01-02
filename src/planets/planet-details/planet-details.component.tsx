@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PlanetDetails() {
+const PlanetDetails = (props: any) => {
   return (
     <div>
      PlanetDetails
