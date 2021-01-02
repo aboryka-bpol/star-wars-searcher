@@ -20,13 +20,13 @@ const SpaceshipDetails = ({
 }: ISpaceship) => {
   const renderedFilms = films && films.map((film: string) => {
     return (
-      <div>{film}</div>
+      <div key={film}>{film}</div>
     )
   })
 
   const renderedPilots = pilots && pilots.map((pilot: string) => {
     return (
-      <div>{pilot}</div>
+      <div key={pilot}>{pilot}</div>
     )
   })
 

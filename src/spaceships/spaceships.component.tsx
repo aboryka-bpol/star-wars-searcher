@@ -2,7 +2,7 @@ import React, {  useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import * as actions from './store/spaceships.actions';
 import { bindActionCreators } from 'redux'
-import List from '../components/Shared/List';
+import List from '../components/Shared/list';
 import SpaceshipDetails from './spaceship-details';
 import { ISpaceship } from './interfaces/spaceship.interface';
 import { ISpaceshipsAwareState } from './store/spaceships.reducer';

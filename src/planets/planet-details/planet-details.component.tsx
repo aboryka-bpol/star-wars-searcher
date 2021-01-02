@@ -1,18 +1,28 @@
 import React from 'react';
 import { IPlanet } from '../interfaces/planet.interface';
 
-const PlanetDetails = (props: IPlanet) => {
-  const {name, rotationPeriod, orbitalPeriod, diameter, climate, gravity, terrain, surfaceWater, population, films, residents} = props;
-
-  const renderedFilms = films && films.map((film: string, index: number) => {
+const PlanetDetails = ({
+  name,
+  rotationPeriod,
+  orbitalPeriod,
+  diameter,
+  climate,
+  gravity,
+  terrain,
+  surfaceWater,
+  population,
+  films,
+  residents
+}: IPlanet) => {
+  const renderedFilms = films && films.map((film: string) => {
     return (
-      <div key={index}>{film}</div>
+      <div key={film}>{film}</div>
     )
   });
 
-  const renderedResidents = residents && residents.map((resident: string, index: number) => {
+  const renderedResidents = residents && residents.map((resident: string) => {
     return (
-      <div key={index}>{resident}</div>
+      <div key={resident}>{resident}</div>
     )
   })
 

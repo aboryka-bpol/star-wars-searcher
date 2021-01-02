@@ -2,7 +2,7 @@ import React, {  useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import * as actions from './store/planets.actions';
 import { bindActionCreators } from 'redux'
-import List from '../components/Shared/List';
+import List from '../components/Shared/list';
 import PlanetDetails from './planet-details';
 import { IPlanet } from './interfaces/planet.interface';
 import { IPlanetsAwareState } from './store/planets.reducer';
