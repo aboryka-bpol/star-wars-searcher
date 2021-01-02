@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Planets from '../planets';
-import Spaceships from './Spaceships';
+import Spaceships from '../spaceships';
 import Vehicles from './Vehicles';
 import People from './People';
 import Films from './Films';
