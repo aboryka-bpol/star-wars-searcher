@@ -7,6 +7,10 @@ export interface IPlanetsState {
     hasPrevPage: boolean
 }
 
+export interface IPlanetsAwareState {
+    planetsReducer: IPlanetsState
+}
+
 const initialState: IPlanetsState = {
     planets: [],
     hasPrevPage: false,

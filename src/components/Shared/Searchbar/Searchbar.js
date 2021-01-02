@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Searchbar() {
+function Searchbar({placeholder, onSearchChange}) {
   return (
     <div>
-     Searchbar
+     <input type='text' placeholder={placeholder} onChange={(e) => onSearchChange(e.target.value)}/>
     </div>
   );
 }
