@@ -19,7 +19,7 @@ const Navbar = () => {
           justify="flex-end"
           alignItems="flex-start">
           <Breadcrumbs aria-label="breadcrumb">
-            <Link href="/" color={isActive('/')}>Planets</Link>
+            <Link href="/planets" color={isActive('/planets')}>Planets</Link>
             <Link href="/spaceships" color={isActive('/spaceships')}>Spaceships</Link>
             <Link href="/vehicles" color={isActive('/vehicles')}>Vehicles</Link>
             <Link href="/people" color={isActive('/people')}>People</Link>
