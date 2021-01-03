@@ -35,6 +35,8 @@ export const ResourceValue = styled.span`
 export const ResourceList = styled(List)`
   display: flex;
   flex-wrap: wrap;
+  max-height: 600px;
+  overflow-y: scroll;
 `;
 
 export const ResourceListItem = styled(({button, ...rest}) => (
