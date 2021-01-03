@@ -5,7 +5,7 @@ import Spaceships from './spaceships';
 import Vehicles from './vehicles';
 import People from './people';
 import Films from './films';
-import Species from './components/Species';
+import Species from './species';
 
 const Router = () => {
   return (
