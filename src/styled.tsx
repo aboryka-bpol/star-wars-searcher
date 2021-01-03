@@ -25,8 +25,7 @@ export const ResourceTitle = styled.div`
 export const ResourceGrid = styled((props) => (
   <Grid {...props} />
 ))`
-  padding: 0 30px;
-  max-height: 300px;
+  padding: 0 15px;
 `
 
 export const ResourceValue = styled.span`
@@ -42,6 +41,7 @@ export const ResourceListItem = styled(({button, ...rest}) => (
   <ListItem {...rest} />
 ))`
   flex-basis: 49%;
+  align-items: flex-start;
 `
 
 export const ResourcesNotFound = styled.div`
