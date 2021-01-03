@@ -6,7 +6,7 @@ import { ListItemText } from '@material-ui/core';
 import {mappedPlanets} from './planet-details.helper';
 
 const PlanetDetails = (props: IPlanet) => {
-  const {films, residents, ...rest } = props;
+  const {films, residents, resourceKey,...rest } = props;
   const renderedFilms = films && films.map((film: string) => {
     return (
       <ResourceValue key={film}>{film}</ResourceValue>

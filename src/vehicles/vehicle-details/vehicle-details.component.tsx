@@ -6,7 +6,7 @@ import { ListItemText } from '@material-ui/core';
 import {mappedVehicles} from './vehicle-details.helper';
 
 const VehicleDetails = (props: IVehicle) => {
-  const {films, pilots, ...rest } = props;
+  const {films, pilots, resourceKey, ...rest } = props;
   const renderedFilms = films && films.map((film: string) => {
     return (
       <ResourceValue key={film}>{film}</ResourceValue>

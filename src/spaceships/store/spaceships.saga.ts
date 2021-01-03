@@ -13,14 +13,14 @@ function* fetchStarships(action: IFetchSpaceships) {
         );
 
         const mappedResults = results.map(
-            (result: Partial<ISpaceship[]> & { 
+            (result: Partial<ISpaceship> & { 
                 cost_in_credits: number,
                 max_atmosphering_speed: number,
                 cargo_capacity: number,
                 hyperdrive_rating: number,
                 starship_class: string,
                 MGLT: number
-            }): ISpaceship => {
+            })=> {
             const { cost_in_credits: costInCredits,
                     max_atmosphering_speed: maxAtmospheringSpeed,
                     cargo_capacity: cargoCapacity,
@@ -31,6 +31,7 @@ function* fetchStarships(action: IFetchSpaceships) {
                     
             return {
                 ...rest,
+                resourceKey:result.name,
                 costInCredits,
                 maxAtmospheringSpeed,
                 cargoCapacity,

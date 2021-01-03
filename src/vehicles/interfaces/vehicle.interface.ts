@@ -1,4 +1,5 @@
 export interface IVehicle {
+    resourceKey?: string;
     name?: string;
     model?: string;
     manufacturer?: string;

@@ -6,7 +6,7 @@ import { ListItemText } from '@material-ui/core';
 import {mappedSpaceships} from './spaceship-details.helper';
 
 const SpaceshipDetails = (props: ISpaceship) => {
-  const {films, pilots, ...rest } = props;
+  const {films, pilots, resourceKey, ...rest } = props;
   const renderedFilms = films && films.map((film: string) => {
     return (
       <ResourceValue key={film}>{film}</ResourceValue>

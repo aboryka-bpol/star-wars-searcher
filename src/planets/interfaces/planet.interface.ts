@@ -1,4 +1,5 @@
 export interface IPlanet {
+    resourceKey?: string;
     name?: string;
     rotationPeriod?: number;
     orbitalPeriod?: number;

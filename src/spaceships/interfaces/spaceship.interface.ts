@@ -1,4 +1,5 @@
 export interface ISpaceship {
+    resourceKey?: string;
     name?: string;
     model?: string;
     manufacturer?: string;

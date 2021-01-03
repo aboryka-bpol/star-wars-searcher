@@ -14,7 +14,7 @@ function* fetchPlanets(action: IFetchPlanets) {
         );
 
         const mappedResults = results.map(
-            (result: Partial<IPlanet[]> & { rotation_period: number, orbital_period: number, surface_water: number }): IPlanet => {
+            (result: Partial<IPlanet> & { rotation_period: number, orbital_period: number, surface_water: number }): IPlanet => {
             const { rotation_period: rotationPeriod,
                     orbital_period: orbitalPeriod,
                     surface_water: surfaceWater,
@@ -22,6 +22,7 @@ function* fetchPlanets(action: IFetchPlanets) {
                     
             return {
                 ...rest,
+                resourceKey: result.name,
                 rotationPeriod,
                 orbitalPeriod,
                 surfaceWater
