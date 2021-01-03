@@ -16,7 +16,6 @@ interface IProps {
   onResourceSelect: (spaceship: ISpaceship) => void,
 }
 
-
 const ResourcesList = ({ resources, hasPrev, hasNext, onPageChange, page, onResourceSelect }: IProps) => {
   const renderedList = resources.map((resource) => {
     const { name } = resource;
@@ -34,7 +33,7 @@ const ResourcesList = ({ resources, hasPrev, hasNext, onPageChange, page, onReso
   return (
       <Grid container justify="flex-end">
         {renderedList}
-        { ( hasPrev || hasNext ) &&
+        { ( (hasPrev || hasNext) && !!resources.length ) &&
         <ButtonGroup variant="text" color="secondary" aria-label="contained primary button group">
           <Button value="prev" disabled={!hasPrev} onClick={() => onPageChange(page-1)}>{'< prev'}</Button>
           <Button value="next" disabled={!hasNext} onClick={() => onPageChange(page+1)}>{'next >'}</Button>
