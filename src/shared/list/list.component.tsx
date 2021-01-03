@@ -3,9 +3,11 @@ import { IPlanet } from "../../planets/interfaces/planet.interface";
 import { ISpaceship } from "../../spaceships/interfaces/spaceship.interface";
 import {StyledListItem, StyledList, StyledButton} from "./styled";
 import React from "react";
+import { IVehicle } from "../../vehicles/interfaces/vehicle.interface";
+import { IFilm } from "../../films/interfaces/film.interface";
 
 
-type Resource = ISpaceship | IPlanet;
+type Resource = ISpaceship | IPlanet | IVehicle | IFilm;
 
 interface IProps { 
   resources: Resource[],
@@ -18,11 +20,11 @@ interface IProps {
 
 const ResourcesList = ({ resources, hasPrev, hasNext, onPageChange, page, onResourceSelect }: IProps) => {
   const renderedList = resources.map((resource) => {
-    const { name } = resource;
+    const { resourceKey } = resource;
     return (
-      <StyledList key={name}>
+      <StyledList key={resourceKey}>
         <StyledListItem>
-          <ListItemText primary={name} />
+          <ListItemText primary={resourceKey} />
           <StyledButton variant="contained" color="primary" size="small" onClick={() => onResourceSelect(resource)}>Details</StyledButton>
         </StyledListItem>
         <Divider />
