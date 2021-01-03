@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Planets from '../planets';
-import Spaceships from '../spaceships';
-import Vehicles from './Vehicles';
-import People from './People';
-import Films from './Films';
-import Species from './Species';
+import Planets from './planets';
+import Spaceships from './spaceships';
+import Vehicles from './components/Vehicles';
+import People from './components/People';
+import Films from './components/Films';
+import Species from './components/Species';
 
-function Router() {
+const Router = () => {
   return (
     <Switch>
       <Route path='/' exact><Planets/></Route>
