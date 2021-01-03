@@ -4,7 +4,7 @@ import Planets from './planets';
 import Spaceships from './spaceships';
 import Vehicles from './vehicles';
 import People from './components/People';
-import Films from './components/Films';
+import Films from './films';
 import Species from './components/Species';
 
 const Router = () => {

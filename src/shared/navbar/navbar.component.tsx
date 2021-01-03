@@ -22,9 +22,9 @@ const Navbar = () => {
             <Link href="/" color={isActive('/')}>Planets</Link>
             <Link href="/spaceships" color={isActive('/spaceships')}>Spaceships</Link>
             <Link href="/vehicles" color={isActive('/vehicles')}>Vehicles</Link>
-            <Link href="/people">People</Link>
-            <Link href="/films">Films</Link>
-            <Link href="/species">Species</Link>
+            <Link href="/people" color={isActive('/people')}>People</Link>
+            <Link href="/films" color={isActive('/films')}>Films</Link>
+            <Link href="/species" color={isActive('/species')}>Species</Link>
           </Breadcrumbs>
         </Grid>
         </Container>

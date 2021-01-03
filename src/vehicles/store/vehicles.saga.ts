@@ -13,13 +13,13 @@ function* fetchVehicles(action: IFetchVehicles) {
         );
 
         const mappedResults = results.map(
-            (result: Partial<IVehicle[]> & { 
+            (result: Partial<IVehicle> & { 
                 cost_in_credits: number,
                 max_atmosphering_speed: number,
                 cargo_capacity: number,
                 hyperdrive_rating: number,
                 vehicle_class: string,
-            }): IVehicle => {
+            }) => {
             const { cost_in_credits: costInCredits,
                     max_atmosphering_speed: maxAtmospheringSpeed,
                     cargo_capacity: cargoCapacity,
@@ -28,6 +28,7 @@ function* fetchVehicles(action: IFetchVehicles) {
                     
             return {
                 ...rest,
+                resourceKey:result.name,
                 costInCredits,
                 maxAtmospheringSpeed,
                 cargoCapacity,
