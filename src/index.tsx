@@ -8,6 +8,8 @@ import createSagaMiddleware from 'redux-saga'
 import planetsReducer from './planets/store/planets.reducer';
 import spaceshipsReducer from './spaceships/store/spaceships.reducer';
 import spaceshipsSaga from './spaceships/store/spaceships.saga';
+import vehiclesReducer from './vehicles/store/vehicles.reducer';
+import vehiclesSaga from './vehicles/store/vehicles.saga';
 import planetsSaga from './planets/store/planets.saga';
 import { all } from 'redux-saga/effects';
 import { ThemeProvider } from '@material-ui/core';
@@ -16,12 +18,14 @@ import { theme } from './styled';
 const sagaMiddleware = createSagaMiddleware();
 const reducer = combineReducers({
     planetsReducer,
-    spaceshipsReducer
+    spaceshipsReducer,
+    vehiclesReducer
 });
 function* saga() {
     yield all([
         planetsSaga(),
-        spaceshipsSaga()
+        spaceshipsSaga(),
+        vehiclesSaga()
     ])
   }
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));

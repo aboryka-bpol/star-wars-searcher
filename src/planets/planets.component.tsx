@@ -8,6 +8,7 @@ import { IPlanet } from './interfaces/planet.interface';
 import { IPlanetsAwareState } from './store/planets.reducer';
 import Searchbar from '../shared/searchbar';
 import { Container, Grid } from '@material-ui/core';
+import { ResourcesNotFound, theme } from '../styled';
 
 const initialState = {
   page: 1,
@@ -48,16 +49,16 @@ const Planets = ({ fetchPlanets, planets, hasPrevPage, hasNextPage, isFetching }
         justify="flex-start"
         alignItems="flex-start"
       >
-        <Grid container item sm={12} md={4}>
-          <ResourcesList resources={planets}
+        <Grid container item sm={12} md={6}>
+          { planets.length ? <ResourcesList resources={planets}
                       hasPrev={hasPrevPage}
                       hasNext={hasNextPage}
                       page={queryParams.page}
                       onPageChange={changePage}
                       onResourceSelect={(planet: IPlanet) => setSelectedResource(planet)}
-            />
+          /> : <ResourcesNotFound theme={theme}>No planets found</ResourcesNotFound> }
         </Grid>
-        <Grid container item sm={12} md={8}>
+        <Grid container item sm={12} md={6}>
           { !!Object.keys(selectedResource).length && <PlanetDetails {...selectedResource} /> }
         </Grid>
       </Grid>

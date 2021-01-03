@@ -2,14 +2,18 @@ import { Breadcrumbs, Container, Grid, Link } from '@material-ui/core';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Title from './styled';
-import { theme } from '../../styled';
+import { theme, GrayBackground } from '../../styled';
 
 const Navbar = () => {
   const location = useLocation();
   const isActive = (value: string) => (location.pathname === value ? 'textPrimary' : 'primary')
     return (
-      <Container>
-        <Title theme={theme}>Star Wars API searcher</Title>
+      <React.Fragment>
+        <Container>
+          <Title theme={theme}>Star Wars API searcher</Title>
+        </Container>
+        <GrayBackground>
+        <Container>
         <Grid 
           container
           justify="flex-end"
@@ -23,7 +27,9 @@ const Navbar = () => {
             <Link href="/species">Species</Link>
           </Breadcrumbs>
         </Grid>
-      </Container>
+        </Container>
+        </GrayBackground>
+      </React.Fragment>
     );
   }
   

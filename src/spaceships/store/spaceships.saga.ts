@@ -3,7 +3,7 @@ import {fetchSpaceshipsSuccess, fetchSpaceshipsFailure, IFetchSpaceships, Spaces
 import SpaceshipsApi from '../api/spaceships.api';
 import { ISpaceship } from '../interfaces/spaceship.interface';
 
-function* fetchPlanets(action: IFetchSpaceships) {
+function* fetchStarships(action: IFetchSpaceships) {
     try {
         const { page, search } = action.payload;
         const { next, previous, results } = yield call(
@@ -46,11 +46,11 @@ function* fetchPlanets(action: IFetchSpaceships) {
 }
 
 function* watchRequests() {
-    yield takeLatest(SpaceshipsActionTypes.FETCH_SPACESHIPS, fetchPlanets);
+    yield takeLatest(SpaceshipsActionTypes.FETCH_SPACESHIPS, fetchStarships);
 }
 
-function* planetsSaga() {
+function* starshipsSaga() {
     yield all([fork(watchRequests)]);
 }
 
-export default planetsSaga;
+export default starshipsSaga;

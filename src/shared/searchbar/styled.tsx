@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const StyledTextField = styled(TextField)`
 && {
-  width: 100%;
+  width: 50%;
   margin-bottom: 20px;
 }
 `;

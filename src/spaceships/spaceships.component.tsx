@@ -8,12 +8,12 @@ import { ISpaceship } from './interfaces/spaceship.interface';
 import { ISpaceshipsAwareState } from './store/spaceships.reducer';
 import Searchbar from '../shared/searchbar';
 import { Container, Grid } from '@material-ui/core';
+import { ResourcesNotFound, theme } from '../styled';
 
 const initialState = {
   page: 1,
   searched: ''
 }
-
 
 const Spaceships = ({ fetchSpaceships, spaceships, hasPrevPage, hasNextPage, isFetching }: Props) => {
   const [queryParams, setQueryParams] = useState(initialState)
@@ -50,16 +50,16 @@ const Spaceships = ({ fetchSpaceships, spaceships, hasPrevPage, hasNextPage, isF
         justify="flex-start"
         alignItems="flex-start"
       >
-        <Grid container item sm={12} md={4}>
-          <ResourcesList resources={spaceships}
-                hasPrev={hasPrevPage}
-                hasNext={hasNextPage}
-                page={queryParams.page}
-                onPageChange={changePage}
-                onResourceSelect={(spaceship: ISpaceship) => setSelectedResource(spaceship)}
-          />
+        <Grid container item sm={12} md={6}>
+          { !!spaceships.length ? <ResourcesList resources={spaceships}
+                  hasPrev={hasPrevPage}
+                  hasNext={hasNextPage}
+                  page={queryParams.page}
+                  onPageChange={changePage}
+                  onResourceSelect={(spaceship: ISpaceship) => setSelectedResource(spaceship)}
+          /> : <ResourcesNotFound theme={theme}>No spaceship found</ResourcesNotFound>}
         </Grid>
-        <Grid container item sm={12} md={8}>
+        <Grid container item sm={12} md={6}>
           { !!Object.keys(selectedResource).length && <SpaceshipDetails {...selectedResource} /> }
         </Grid>
       </Grid>

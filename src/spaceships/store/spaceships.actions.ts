@@ -22,7 +22,6 @@ export interface IFetchSpaceshipsFailure {
     payload: {error: IError}
 }
 
-
 export const fetchSpaceships = (page: number, search: string): IFetchSpaceships => {
     return {
         type: SpaceshipsActionTypes.FETCH_SPACESHIPS,
