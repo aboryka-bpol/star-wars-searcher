@@ -2,54 +2,78 @@ import React, {  useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import * as actions from './store/spaceships.actions';
 import { bindActionCreators } from 'redux'
-import List from '../components/Shared/list';
+import ResourcesList from '../shared/list';
 import SpaceshipDetails from './spaceship-details';
 import { ISpaceship } from './interfaces/spaceship.interface';
 import { ISpaceshipsAwareState } from './store/spaceships.reducer';
-import Searchbar from '../components/Shared/Searchbar';
+import Searchbar from '../shared/searchbar';
+import { Container, Grid } from '@material-ui/core';
+
+const initialState = {
+  page: 1,
+  searched: ''
+}
 
 
-const Spaceships = ({ fetchSpaceships, spaceships, hasPrevPage, hasNextPage }: Props) => {
-  const [page, setPage] = useState(1);
-  const [searched, setSearched] = useState('');
-  const [debouncedSearch, setDebouncedSearch] = useState(searched);
+const Spaceships = ({ fetchSpaceships, spaceships, hasPrevPage, hasNextPage, isFetching }: Props) => {
+  const [queryParams, setQueryParams] = useState(initialState)
+  const [debouncedSearched, setDebouncedSearched] = useState(queryParams.searched);
   const [selectedResource, setSelectedResource] = useState({});
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      setDebouncedSearch(searched)
-    }, 1000);
+      setQueryParams({page:1, searched: debouncedSearched});
+    }, 500);
 
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [searched])
+  }, [debouncedSearched])
 
   useEffect(() => {
-    fetchSpaceships(page, debouncedSearch);
-  }, [fetchSpaceships, page, debouncedSearch]);
+    fetchSpaceships(queryParams.page, queryParams.searched);
+  }, [fetchSpaceships, queryParams.page, queryParams.searched]);
+
+
+  const changePage = (selectedPage: number) => {
+    if(isFetching) return;
+
+    setQueryParams({...queryParams, page: selectedPage})
+  }
 
   return (
-    <div>
-      <Searchbar placeholder='search for a spaceship' onSearchChange={(search: string) => setSearched(search)}/>
-      <List resources={spaceships}
-            hasPrev={hasPrevPage}
-            hasNext={hasNextPage}
-            page={page}
-            onPageChange={(selectedPage: number) => setPage(selectedPage)}
-            onResourceSelect={(spaceship: ISpaceship) => setSelectedResource(spaceship)}
-      />
-    { !!Object.keys(selectedResource).length && <SpaceshipDetails {...selectedResource} /> }
-    </div>
+    <Container>
+      <Searchbar placeholder='search for a spaceship' onSearchChange={(search: string) => setDebouncedSearched(search)}/>
+      <Grid
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="flex-start"
+      >
+        <Grid container item sm={12} md={4}>
+          <ResourcesList resources={spaceships}
+                hasPrev={hasPrevPage}
+                hasNext={hasNextPage}
+                page={queryParams.page}
+                onPageChange={changePage}
+                onResourceSelect={(spaceship: ISpaceship) => setSelectedResource(spaceship)}
+          />
+        </Grid>
+        <Grid container item sm={12} md={8}>
+          { !!Object.keys(selectedResource).length && <SpaceshipDetails {...selectedResource} /> }
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 
 const mapStateToProps = (
-  { spaceshipsReducer: { spaceships, hasPrevPage, hasNextPage } }: ISpaceshipsAwareState
+  { spaceshipsReducer: { spaceships, hasPrevPage, hasNextPage, isFetching } }: ISpaceshipsAwareState
   ) => ({
     spaceships,
     hasPrevPage,
-    hasNextPage
+    hasNextPage,
+    isFetching
   })
 
 

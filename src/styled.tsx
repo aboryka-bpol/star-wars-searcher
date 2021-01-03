@@ -1,6 +1,19 @@
-import { Grid } from '@material-ui/core';
+import { createMuiTheme, Grid } from '@material-ui/core';
 import styled from 'styled-components';
 
+export const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#63ace5",
+    },
+    secondary: {
+      main: "#565656"
+    },
+  },
+  typography: {
+    fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+  }
+});
 
 export const ResourceTitle = styled.div`
   padding: 10px 30px;

@@ -1,5 +1,8 @@
 import React from 'react';
 import { IPlanet } from '../interfaces/planet.interface';
+import { theme } from '../../styled';
+import { ResourceTitle, ResourceGrid, ResourceValue } from '../../styled';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 
 const PlanetDetails = ({
   name,
@@ -16,38 +19,63 @@ const PlanetDetails = ({
 }: IPlanet) => {
   const renderedFilms = films && films.map((film: string) => {
     return (
-      <div key={film}>{film}</div>
-    )
+      <ResourceValue key={film}>{film}</ResourceValue>
+    ) 
   });
 
   const renderedResidents = residents && residents.map((resident: string) => {
     return (
-      <div key={resident}>{resident}</div>
+      <ResourceValue key={resident}>{resident}</ResourceValue>
     )
   })
 
   return (
-    <div>
-      <div>Planet Name: {name}</div>
-      <div>Rotation Period: {rotationPeriod}</div>
-      <div>Orbital Period: {orbitalPeriod}</div>
-      <div>Diameter: {diameter}</div>
-      <div>Climate: {climate}</div>
-      <div>Gravity: {gravity}</div>
-      <div>Terrain: {terrain}</div>
-      <div>Surface Water: {surfaceWater}</div>
-      <div>Population: {population}</div>
-      <div>Film Resources:
-        <div>
-          {renderedFilms}
-        </div>
-      </div>
-      <div>Resident Resources:
-        <div>
-          {renderedResidents}
-        </div>
-      </div>
-    </div>
+    <React.Fragment>
+      <ResourceTitle theme={theme}>Planet Details</ResourceTitle>
+      <ResourceGrid
+        container
+        direction="row"
+        justify="flex-start"
+      >
+        <List>
+          <ListItem>
+            <ListItemText primary="Name:" secondary={name}></ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Rotation Period:" secondary={rotationPeriod}></ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Orbital Period:" secondary={orbitalPeriod}></ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Diameter:" secondary={diameter}></ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Climate:" secondary={climate}></ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Gravity:" secondary={gravity}></ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Terrain:" secondary={terrain}></ListItemText>
+          </ListItem>
+        </List>
+        <List>
+          <ListItem>
+            <ListItemText primary="Surface Water:" secondary={surfaceWater}></ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Population:" secondary={population}></ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Film Resources::" secondary={renderedFilms}></ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Resident Resources:" secondary={renderedResidents}></ListItemText>
+          </ListItem>
+        </List>
+      </ResourceGrid>
+    </React.Fragment>
   );
 }
 

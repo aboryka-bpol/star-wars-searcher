@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import App from './app.component';
 import { BrowserRouter } from 'react-router-dom';
 import {Provider} from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux'
@@ -10,6 +10,8 @@ import spaceshipsReducer from './spaceships/store/spaceships.reducer';
 import spaceshipsSaga from './spaceships/store/spaceships.saga';
 import planetsSaga from './planets/store/planets.saga';
 import { all } from 'redux-saga/effects';
+import { ThemeProvider } from '@material-ui/core';
+import { theme } from './styled';
 
 const sagaMiddleware = createSagaMiddleware();
 const reducer = combineReducers({
@@ -27,9 +29,11 @@ sagaMiddleware.run(saga);
 
 ReactDOM.render(
     <Provider store={store}>
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ThemeProvider>
     </Provider>,
     document.getElementById('root')
 );

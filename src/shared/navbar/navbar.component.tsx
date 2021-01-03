@@ -2,7 +2,7 @@ import { Breadcrumbs, Container, Grid, Link } from '@material-ui/core';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Title from './styled';
-import { theme } from '../../index';
+import { theme } from '../../styled';
 
 const Navbar = () => {
   const location = useLocation();

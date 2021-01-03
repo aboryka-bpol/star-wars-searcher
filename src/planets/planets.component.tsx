@@ -2,54 +2,76 @@ import React, {  useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import * as actions from './store/planets.actions';
 import { bindActionCreators } from 'redux'
-import List from '../components/Shared/list';
+import ResourcesList from '../shared/list';
 import PlanetDetails from './planet-details';
 import { IPlanet } from './interfaces/planet.interface';
 import { IPlanetsAwareState } from './store/planets.reducer';
-import Searchbar from '../components/Shared/Searchbar';
+import Searchbar from '../shared/searchbar';
+import { Container, Grid } from '@material-ui/core';
 
+const initialState = {
+  page: 1,
+  searched: ''
+}
 
-const Planets = ({ fetchPlanets, planets, hasPrevPage, hasNextPage }: Props) => {
-  const [page, setPage] = useState(1);
-  const [searched, setSearched] = useState('');
-  const [debouncedSearch, setDebouncedSearch] = useState(searched);
+const Planets = ({ fetchPlanets, planets, hasPrevPage, hasNextPage, isFetching }: Props) => {
+  const [queryParams, setQueryParams] = useState(initialState)
+  const [debouncedSearched, setDebouncedSearched] = useState('');
   const [selectedResource, setSelectedResource] = useState({});
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      setDebouncedSearch(searched)
-    }, 1000);
+      setQueryParams({page:1, searched: debouncedSearched});
+    }, 500);
 
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [searched])
+  }, [debouncedSearched])
 
   useEffect(() => {
-    fetchPlanets(page, debouncedSearch);
-  }, [fetchPlanets, page, debouncedSearch]);
+    fetchPlanets(queryParams.page, queryParams.searched);
+  }, [fetchPlanets, queryParams.page, queryParams.searched]);
+
+  const changePage = (selectedPage: number) => {
+    if(isFetching) return;
+
+    setQueryParams({...queryParams, page: selectedPage})
+  }
 
   return (
-    <div>
-      <Searchbar placeholder='search for a planet' onSearchChange={(search: string) => setSearched(search)}/>
-      <List resources={planets}
-            hasPrev={hasPrevPage}
-            hasNext={hasNextPage}
-            page={page}
-            onPageChange={(selectedPage: number) => setPage(selectedPage)}
-            onResourceSelect={(planet: IPlanet) => setSelectedResource(planet)}
-      />
-    { !!Object.keys(selectedResource).length && <PlanetDetails {...selectedResource} /> }
-    </div>
+    <Container>
+      <Searchbar placeholder='search for a planet' onSearchChange={(search: string) => setDebouncedSearched(search)}/>
+      <Grid
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="flex-start"
+      >
+        <Grid container item sm={12} md={4}>
+          <ResourcesList resources={planets}
+                      hasPrev={hasPrevPage}
+                      hasNext={hasNextPage}
+                      page={queryParams.page}
+                      onPageChange={changePage}
+                      onResourceSelect={(planet: IPlanet) => setSelectedResource(planet)}
+            />
+        </Grid>
+        <Grid container item sm={12} md={8}>
+          { !!Object.keys(selectedResource).length && <PlanetDetails {...selectedResource} /> }
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 
 const mapStateToProps = (
-  { planetsReducer: { planets, hasPrevPage, hasNextPage } }: IPlanetsAwareState
+  { planetsReducer: { planets, hasPrevPage, hasNextPage, isFetching } }: IPlanetsAwareState
   ) => ({
     planets,
     hasPrevPage,
-    hasNextPage
+    hasNextPage,
+    isFetching
   })
 
 
