@@ -29,17 +29,17 @@ const SpaceshipDetails = (props: ISpaceship) => {
   )})
   return (
     <React.Fragment>
-    <ResourceTitle theme={theme}>Spaceship Details</ResourceTitle>
-    <ResourceGrid
-      container
-      direction="row"
-      justify="flex-start"
-    >
-      <ResourceList>
-        {renderedSpaceship}
-      </ResourceList>
-    </ResourceGrid>
-  </React.Fragment>
+      <ResourceTitle theme={theme}>Spaceship Details</ResourceTitle>
+      <ResourceGrid
+        container
+        direction="row"
+        justify="flex-start"
+      >
+        <ResourceList>
+          {renderedSpaceship}
+        </ResourceList>
+      </ResourceGrid>
+    </React.Fragment>
   );
 }
 

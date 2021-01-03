@@ -29,17 +29,17 @@ const VehicleDetails = (props: IVehicle) => {
   )})
   return (
     <React.Fragment>
-    <ResourceTitle theme={theme}>Vehicle Details</ResourceTitle>
-    <ResourceGrid
-      container
-      direction="row"
-      justify="flex-start"
-    >
-      <ResourceList>
-        {renderedVehicle}
-      </ResourceList>
-    </ResourceGrid>
-  </React.Fragment>
+      <ResourceTitle theme={theme}>Vehicle Details</ResourceTitle>
+      <ResourceGrid
+        container
+        direction="row"
+        justify="flex-start"
+      >
+        <ResourceList>
+          {renderedVehicle}
+        </ResourceList>
+      </ResourceGrid>
+    </React.Fragment>
   );
 }
 

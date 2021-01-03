@@ -29,17 +29,17 @@ const PlanetDetails = (props: IPlanet) => {
   )})
   return (
     <React.Fragment>
-    <ResourceTitle theme={theme}>Planet Details</ResourceTitle>
-    <ResourceGrid
-      container
-      direction="row"
-      justify="flex-start"
-    >
-      <ResourceList>
-        {renderedPlanet}
-      </ResourceList>
-    </ResourceGrid>
-  </React.Fragment>
+      <ResourceTitle theme={theme}>Planet Details</ResourceTitle>
+      <ResourceGrid
+        container
+        direction="row"
+        justify="flex-start"
+      >
+        <ResourceList>
+          {renderedPlanet}
+        </ResourceList>
+      </ResourceGrid>
+    </React.Fragment>
   );
 }
 
