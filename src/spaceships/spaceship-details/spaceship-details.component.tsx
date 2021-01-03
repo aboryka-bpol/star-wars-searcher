@@ -40,7 +40,6 @@ const SpaceshipDetails = ({
       container
       direction="row"
       justify="flex-start"
-      flexWrap="nowrap"
     >
       <List>
         <ListItem>
