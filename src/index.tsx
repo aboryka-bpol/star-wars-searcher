@@ -5,16 +5,12 @@ import { BrowserRouter } from 'react-router-dom';
 import {Provider} from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import planetsReducer from './planets/store/planets.reducer';
-import spaceshipsReducer from './spaceships/store/spaceships.reducer';
-import spaceshipsSaga from './spaceships/store/spaceships.saga';
-import vehiclesReducer from './vehicles/store/vehicles.reducer';
-import vehiclesSaga from './vehicles/store/vehicles.saga';
-import planetsSaga from './planets/store/planets.saga';
-import filmsSaga from './films/store/films.saga';
-import filmsReducer from './films/store/films.reducer';
-import peopleSaga from './people/store/people.saga';
-import peopleReducer from './people/store/people.reducer';
+import { planetsReducer, planetsSaga } from './planets/store';
+import { spaceshipsReducer, spaceshipsSaga } from './spaceships/store';
+import { vehiclesReducer, vehiclesSaga } from './vehicles/store';
+import { filmsSaga, filmsReducer } from './films/store';
+import { peopleSaga, peopleReducer } from './people/store';
+import { speciesSaga, speciesReducer} from './species/store';
 import { all } from 'redux-saga/effects';
 import { ThemeProvider } from '@material-ui/core';
 import { theme } from './styled';
@@ -25,7 +21,8 @@ const reducer = combineReducers({
     spaceshipsReducer,
     vehiclesReducer,
     filmsReducer,
-    peopleReducer
+    peopleReducer,
+    speciesReducer
 });
 function* saga() {
     yield all([
@@ -33,7 +30,8 @@ function* saga() {
         spaceshipsSaga(),
         vehiclesSaga(),
         filmsSaga(),
-        peopleSaga()
+        peopleSaga(),
+        speciesSaga()
     ])
   }
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
