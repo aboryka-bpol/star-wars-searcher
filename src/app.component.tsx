@@ -1,14 +1,14 @@
 import React from 'react';
-import Router from './router';
+import Router from './router.component';
 import Navbar from './shared/navbar';
 
 
 const App = () => {
   return (
-    <div>
+    <React.Fragment>
         <Navbar/>
         <Router/>
-    </div>
+    </React.Fragment>
   );
 }
 

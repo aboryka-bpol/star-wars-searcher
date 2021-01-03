@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Planets from './planets';
 import Spaceships from './spaceships';
 import Vehicles from './vehicles';
-import People from './components/People';
+import People from './people';
 import Films from './films';
 import Species from './components/Species';
 
