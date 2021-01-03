@@ -7,7 +7,7 @@ interface IRenderedPersonData {
     renderedSpecies: JSX.Element[] | undefined
 }
 
-export const mappedPersons = ({
+export const mappedPeople = ({
     name,
     height,
     mass,

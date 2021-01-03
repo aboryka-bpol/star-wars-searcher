@@ -3,7 +3,7 @@ import { IPerson } from '../interfaces/people.interface';
 import { theme } from '../../styled';
 import { ResourceTitle, ResourceGrid, ResourceValue, ResourceList, ResourceListItem } from '../../styled';
 import { ListItemText } from '@material-ui/core';
-import {mappedPersons} from './person-details.helper';
+import {mappedPeople} from './person-details.helper';
 
 const PersonDetails = (props: IPerson) => {
   const {films, starships, species, vehicles, resourceKey, ...rest } = props;
@@ -39,7 +39,7 @@ const PersonDetails = (props: IPerson) => {
     renderedVehicles
   };
 
-  const renderedPerson = mappedPersons(personDetails).map(({description, value}: any) => {
+  const renderedPerson = mappedPeople(personDetails).map(({description, value}: any) => {
   return (
     <ResourceListItem key={description}>
       <ListItemText primary={description} secondary={value}></ListItemText>
