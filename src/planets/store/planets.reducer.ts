@@ -4,7 +4,8 @@ import { PlanetsAction, PlanetsActionTypes } from "./planets.actions";
 export interface IPlanetsState {
     planets: IPlanet[],
     hasNextPage: boolean,
-    hasPrevPage: boolean
+    hasPrevPage: boolean,
+    isFetching: boolean
 }
 
 export interface IPlanetsAwareState {
@@ -14,14 +15,16 @@ export interface IPlanetsAwareState {
 const initialState: IPlanetsState = {
     planets: [],
     hasPrevPage: false,
-    hasNextPage: true
+    hasNextPage: true,
+    isFetching: false
 }
 
 const reducer = (state = initialState, action: PlanetsAction) => {
     switch(action.type) {
         case PlanetsActionTypes.FETCH_PLANETS:
             return {
-                ...state
+                ...state,
+                isFetching: true
             }
         case PlanetsActionTypes.FETCH_PLANETS_SUCCESS:
             const { planets, prev, next } = action.payload;
@@ -29,7 +32,13 @@ const reducer = (state = initialState, action: PlanetsAction) => {
                 ...state,
                 planets,
                 hasPrevPage: !!prev ,
-                hasNextPage: !!next 
+                hasNextPage: !!next,
+                isFetching: false
+            }
+        case PlanetsActionTypes.FETCH_PLANETS_FAILURE:
+            return {
+                ...state,
+                isFetching: false
             }
         default:
             return state;
