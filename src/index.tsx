@@ -13,6 +13,8 @@ import vehiclesSaga from './vehicles/store/vehicles.saga';
 import planetsSaga from './planets/store/planets.saga';
 import filmsSaga from './films/store/films.saga';
 import filmsReducer from './films/store/films.reducer';
+import peopleSaga from './people/store/people.saga';
+import peopleReducer from './people/store/people.reducer';
 import { all } from 'redux-saga/effects';
 import { ThemeProvider } from '@material-ui/core';
 import { theme } from './styled';
@@ -22,14 +24,16 @@ const reducer = combineReducers({
     planetsReducer,
     spaceshipsReducer,
     vehiclesReducer,
-    filmsReducer
+    filmsReducer,
+    peopleReducer
 });
 function* saga() {
     yield all([
         planetsSaga(),
         spaceshipsSaga(),
         vehiclesSaga(),
-        filmsSaga()
+        filmsSaga(),
+        peopleSaga()
     ])
   }
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
