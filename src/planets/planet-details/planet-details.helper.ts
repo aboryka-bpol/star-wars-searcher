@@ -30,7 +30,7 @@ export const mappedPlanets = ({
       value: diameter
     },
     {
-      description: "climate:",
+      description: "Climate:",
       value: climate
     },
     {
@@ -46,15 +46,15 @@ export const mappedPlanets = ({
       value: surfaceWater
     },
     {
-      description: "Population:",
-      value: population
-    },
-    {
       description: "Resident Resources:",
       value: renderedResidents
     },
     {
       description: "Film Resources:",
       value: renderedFilms
-    }
+    },
+    {
+        description: "Population:",
+        value: population
+    },
 ])
