@@ -18,12 +18,14 @@ function* fetchPlanets(action: IFetchSpaceships) {
                 max_atmosphering_speed: number,
                 cargo_capacity: number,
                 hyperdrive_rating: number,
+                starship_class: string,
                 MGLT: number
             }): ISpaceship => {
             const { cost_in_credits: costInCredits,
                     max_atmosphering_speed: maxAtmospheringSpeed,
                     cargo_capacity: cargoCapacity,
                     hyperdrive_rating: hyperdriveRating,
+                    starship_class: starshipClass,
                     MGLT: mglt,
                     ...rest } = result;
                     
@@ -33,6 +35,7 @@ function* fetchPlanets(action: IFetchSpaceships) {
                 maxAtmospheringSpeed,
                 cargoCapacity,
                 hyperdriveRating,
+                starshipClass,
                 mglt
             }
         })
