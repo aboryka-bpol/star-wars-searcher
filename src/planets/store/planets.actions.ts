@@ -1,6 +1,5 @@
-import { IError } from "../interfaces/error.interface";
-import { IPlanet } from "../interfaces/planet.interface";
-
+import { IError } from '../interfaces/error.interface';
+import { IPlanet } from '../interfaces/planet.interface';
 
 export enum PlanetsActionTypes {
     FETCH_PLANETS = '[Planets] Fetch Planets',
@@ -9,46 +8,52 @@ export enum PlanetsActionTypes {
 }
 
 export interface IFetchPlanets {
-    type: typeof PlanetsActionTypes.FETCH_PLANETS,
-    payload: {page: number, search: string}
+    type: typeof PlanetsActionTypes.FETCH_PLANETS;
+    payload: { page: number; search: string };
 }
 
 export interface IFetchPlanetsSuccess {
-    type: typeof PlanetsActionTypes.FETCH_PLANETS_SUCCESS,
-    payload: {planets: IPlanet[], prev: string, next: string}
+    type: typeof PlanetsActionTypes.FETCH_PLANETS_SUCCESS;
+    payload: { planets: IPlanet[]; prev: string; next: string };
 }
 
 export interface IFetchPlanetsFailure {
-    type: typeof PlanetsActionTypes.FETCH_PLANETS_FAILURE,
-    payload: {error: IError}
+    type: typeof PlanetsActionTypes.FETCH_PLANETS_FAILURE;
+    payload: { error: IError };
 }
-
 
 export const fetchPlanets = (page: number, search: string): IFetchPlanets => {
     return {
         type: PlanetsActionTypes.FETCH_PLANETS,
-        payload: {page, search},
-    }
-}
+        payload: { page, search },
+    };
+};
 
-export const fetchPlanetsSuccess = (planets: IPlanet[], prev: string, next: string): IFetchPlanetsSuccess => {
+export const fetchPlanetsSuccess = (
+    planets: IPlanet[],
+    prev: string,
+    next: string
+): IFetchPlanetsSuccess => {
     return {
         type: PlanetsActionTypes.FETCH_PLANETS_SUCCESS,
         payload: {
             planets,
             prev,
-            next
-        }
-    }
-}
+            next,
+        },
+    };
+};
 
 export const fetchPlanetsFailure = (error: IError) => {
     return {
         type: PlanetsActionTypes.FETCH_PLANETS_FAILURE,
         payload: {
-            error
-        }
-    }
-}
+            error,
+        },
+    };
+};
 
-export type PlanetsAction = IFetchPlanets | IFetchPlanetsSuccess | IFetchPlanetsFailure;
+export type PlanetsAction =
+    | IFetchPlanets
+    | IFetchPlanetsSuccess
+    | IFetchPlanetsFailure;

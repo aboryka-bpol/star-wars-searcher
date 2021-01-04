@@ -1,6 +1,10 @@
-import { all, call, fork, put, takeLatest} from 'redux-saga/effects';
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { PlanetsActionTypes } from './planets.actions';
-import {fetchPlanetsSuccess, fetchPlanetsFailure, IFetchPlanets} from './planets.actions';
+import {
+    fetchPlanetsSuccess,
+    fetchPlanetsFailure,
+    IFetchPlanets,
+} from './planets.actions';
 import PlanetsApi from '../api/planets.api';
 import { IPlanet } from '../interfaces/planet.interface';
 
@@ -14,26 +18,34 @@ function* fetchPlanets(action: IFetchPlanets) {
         );
 
         const mappedResults = results.map(
-            (result: Partial<IPlanet> & { rotation_period: number, orbital_period: number, surface_water: number }): IPlanet => {
-            const { rotation_period: rotationPeriod,
+            (
+                result: Partial<IPlanet> & {
+                    rotation_period: number;
+                    orbital_period: number;
+                    surface_water: number;
+                }
+            ): IPlanet => {
+                const {
+                    rotation_period: rotationPeriod,
                     orbital_period: orbitalPeriod,
                     surface_water: surfaceWater,
-                    ...rest } = result;
-                    
-            return {
-                ...rest,
-                resourceKey: result.name,
-                rotationPeriod,
-                orbitalPeriod,
-                surfaceWater
+                    ...rest
+                } = result;
+
+                return {
+                    ...rest,
+                    resourceKey: result.name,
+                    rotationPeriod,
+                    orbitalPeriod,
+                    surfaceWater,
+                };
             }
-        });
+        );
 
-        yield put(fetchPlanetsSuccess(mappedResults, previous, next))
+        yield put(fetchPlanetsSuccess(mappedResults, previous, next));
     } catch (error) {
-        yield put(fetchPlanetsFailure(error))
+        yield put(fetchPlanetsFailure(error));
     }
-
 }
 
 function* watchRequests() {

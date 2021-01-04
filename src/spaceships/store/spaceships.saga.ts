@@ -1,5 +1,10 @@
-import { all, call, fork, put, takeLatest} from 'redux-saga/effects';
-import {fetchSpaceshipsSuccess, fetchSpaceshipsFailure, IFetchSpaceships, SpaceshipsActionTypes}  from './spaceships.actions';
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
+import {
+    fetchSpaceshipsSuccess,
+    fetchSpaceshipsFailure,
+    IFetchSpaceships,
+    SpaceshipsActionTypes,
+} from './spaceships.actions';
 import SpaceshipsApi from '../api/spaceships.api';
 import { ISpaceship } from '../interfaces/spaceship.interface';
 
@@ -13,33 +18,38 @@ function* fetchStarships(action: IFetchSpaceships) {
         );
 
         const mappedResults = results.map(
-            (result: Partial<ISpaceship> & { 
-                cost_in_credits: number,
-                max_atmosphering_speed: number,
-                cargo_capacity: number,
-                hyperdrive_rating: number,
-                starship_class: string,
-                MGLT: number
-            })=> {
-            const { cost_in_credits: costInCredits,
+            (
+                result: Partial<ISpaceship> & {
+                    cost_in_credits: number;
+                    max_atmosphering_speed: number;
+                    cargo_capacity: number;
+                    hyperdrive_rating: number;
+                    starship_class: string;
+                    MGLT: number;
+                }
+            ) => {
+                const {
+                    cost_in_credits: costInCredits,
                     max_atmosphering_speed: maxAtmospheringSpeed,
                     cargo_capacity: cargoCapacity,
                     hyperdrive_rating: hyperdriveRating,
                     starship_class: starshipClass,
                     MGLT: mglt,
-                    ...rest } = result;
-                    
-            return {
-                ...rest,
-                resourceKey:result.name,
-                costInCredits,
-                maxAtmospheringSpeed,
-                cargoCapacity,
-                hyperdriveRating,
-                starshipClass,
-                mglt
+                    ...rest
+                } = result;
+
+                return {
+                    ...rest,
+                    resourceKey: result.name,
+                    costInCredits,
+                    maxAtmospheringSpeed,
+                    cargoCapacity,
+                    hyperdriveRating,
+                    starshipClass,
+                    mglt,
+                };
             }
-        })
+        );
         yield put(fetchSpaceshipsSuccess(mappedResults, previous, next));
     } catch (error) {
         yield put(fetchSpaceshipsFailure(error));

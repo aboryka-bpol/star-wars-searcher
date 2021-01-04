@@ -1,5 +1,10 @@
-import { all, call, fork, put, takeLatest} from 'redux-saga/effects';
-import {fetchSpeciesSuccess, fetchSpeciesFailure, IFetchSpecies, SpeciesActionTypes}  from './species.actions';
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
+import {
+    fetchSpeciesSuccess,
+    fetchSpeciesFailure,
+    IFetchSpecies,
+    SpeciesActionTypes,
+} from './species.actions';
 import SpeciesApi from '../api/species.api';
 import { ISpecies } from '../interfaces/species.interface';
 
@@ -13,30 +18,35 @@ function* fetchSpecies(action: IFetchSpecies) {
         );
 
         const mappedResults = results.map(
-            (result: Partial<ISpecies> & { 
-                average_height: number;
-                skin_colors: string;
-                hair_colors: string;
-                eye_colors: string;
-                average_lifespan: number;
-            })=> {
-            const { average_height: averageHeight,
+            (
+                result: Partial<ISpecies> & {
+                    average_height: number;
+                    skin_colors: string;
+                    hair_colors: string;
+                    eye_colors: string;
+                    average_lifespan: number;
+                }
+            ) => {
+                const {
+                    average_height: averageHeight,
                     skin_colors: skinColors,
                     hair_colors: hairColors,
                     eye_colors: eyeColors,
                     average_lifespan: averageLifespan,
-                    ...rest } = result;
-                    
-            return {
-                ...rest,
-                resourceKey: result.name,
-                averageHeight,
-                skinColors,
-                hairColors,
-                eyeColors,
-                averageLifespan,
+                    ...rest
+                } = result;
+
+                return {
+                    ...rest,
+                    resourceKey: result.name,
+                    averageHeight,
+                    skinColors,
+                    hairColors,
+                    eyeColors,
+                    averageLifespan,
+                };
             }
-        })
+        );
         yield put(fetchSpeciesSuccess(mappedResults, previous, next));
     } catch (error) {
         yield put(fetchSpeciesFailure(error));

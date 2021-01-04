@@ -1,48 +1,48 @@
-import { IPerson } from "../interfaces/people.interface";
-import { PeopleAction, PeopleActionTypes } from "./people.actions";
+import { IPerson } from '../interfaces/people.interface';
+import { PeopleAction, PeopleActionTypes } from './people.actions';
 
 export interface IPeopleState {
-    people: IPerson[],
-    hasNextPage: boolean,
-    hasPrevPage: boolean,
-    isFetching: boolean
+    people: IPerson[];
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+    isFetching: boolean;
 }
 
 export interface IPeopleAwareState {
-    peopleReducer: IPeopleState
+    peopleReducer: IPeopleState;
 }
 
 const initialState: IPeopleState = {
     people: [],
     hasPrevPage: false,
     hasNextPage: true,
-    isFetching: false
-}
+    isFetching: false,
+};
 
 const reducer = (state = initialState, action: PeopleAction) => {
-    switch(action.type) {
+    switch (action.type) {
         case PeopleActionTypes.FETCH_PEOPLE:
             return {
                 ...state,
-                isFetching: true
-            }
+                isFetching: true,
+            };
         case PeopleActionTypes.FETCH_PEOPLE_SUCCESS:
             const { people, prev, next } = action.payload;
             return {
                 ...state,
                 people,
-                hasPrevPage: !!prev ,
+                hasPrevPage: !!prev,
                 hasNextPage: !!next,
-                isFetching: false
-            }
+                isFetching: false,
+            };
         case PeopleActionTypes.FETCH_PEOPLE_FAILURE:
             return {
                 ...state,
-                isFetching: false
-            }
+                isFetching: false,
+            };
         default:
             return state;
     }
-}
+};
 
 export default reducer;

@@ -1,48 +1,48 @@
-import { IFilm } from "../interfaces/film.interface";
-import { FilmsAction, FilmsActionTypes } from "./films.actions";
+import { IFilm } from '../interfaces/film.interface';
+import { FilmsAction, FilmsActionTypes } from './films.actions';
 
 export interface IFilmsState {
-    films: IFilm[],
-    hasNextPage: boolean,
-    hasPrevPage: boolean,
-    isFetching: boolean
+    films: IFilm[];
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+    isFetching: boolean;
 }
 
 export interface IFilmsAwareState {
-    filmsReducer: IFilmsState
+    filmsReducer: IFilmsState;
 }
 
 const initialState: IFilmsState = {
     films: [],
     hasPrevPage: false,
     hasNextPage: true,
-    isFetching: false
-}
+    isFetching: false,
+};
 
 const reducer = (state = initialState, action: FilmsAction) => {
-    switch(action.type) {
+    switch (action.type) {
         case FilmsActionTypes.FETCH_FILMS:
             return {
                 ...state,
-                isFetching: true
-            }
+                isFetching: true,
+            };
         case FilmsActionTypes.FETCH_FILMS_SUCCESS:
             const { films, prev, next } = action.payload;
             return {
                 ...state,
                 films,
-                hasPrevPage: !!prev ,
+                hasPrevPage: !!prev,
                 hasNextPage: !!next,
-                isFetching: false
-            }
+                isFetching: false,
+            };
         case FilmsActionTypes.FETCH_FILMS_FAILURE:
             return {
                 ...state,
-                isFetching: false
-            }
+                isFetching: false,
+            };
         default:
             return state;
     }
-}
+};
 
 export default reducer;

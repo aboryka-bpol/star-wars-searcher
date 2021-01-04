@@ -11,28 +11,28 @@ const Router = () => {
   return (
     <Switch>
       <Route path='/' exact>
-        <Redirect to="/planets" />
+        <Redirect to='/planets' />
       </Route>
       <Route path='/planets'>
-        <Planets/>
+        <Planets />
       </Route>
       <Route path='/spaceships'>
-        <Spaceships/>
+        <Spaceships />
       </Route>
       <Route path='/vehicles'>
-        <Vehicles/>
+        <Vehicles />
       </Route>
       <Route path='/people'>
-        <People/>
+        <People />
       </Route>
       <Route path='/films'>
-        <Films/>
+        <Films />
       </Route>
       <Route path='/species'>
-        <Species/>
+        <Species />
       </Route>
     </Switch>
   );
-}
+};
 
 export default Router;

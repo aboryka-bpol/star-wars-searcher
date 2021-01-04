@@ -1,6 +1,10 @@
-import { all, call, fork, put, takeLatest} from 'redux-saga/effects';
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { FilmsActionTypes } from './films.actions';
-import {fetchFilmsSuccess, fetchFilmsFailure, IFetchFilms} from './films.actions';
+import {
+    fetchFilmsSuccess,
+    fetchFilmsFailure,
+    IFetchFilms,
+} from './films.actions';
 import FilmsApi from '../api/films.api';
 import { IFilm } from '../interfaces/film.interface';
 
@@ -14,26 +18,34 @@ function* fetchFilms(action: IFetchFilms) {
         );
 
         const mappedResults = results.map(
-            (result: Partial<IFilm> & { episode_id: number, opening_crawl: string, release_date: Date }): IFilm => {
-            const { episode_id: episodeId,
+            (
+                result: Partial<IFilm> & {
+                    episode_id: number;
+                    opening_crawl: string;
+                    release_date: Date;
+                }
+            ): IFilm => {
+                const {
+                    episode_id: episodeId,
                     opening_crawl: openingCrawl,
                     release_date: releaseDate,
-                    ...rest } = result;
-                    
-            return {
-                ...rest,
-                resourceKey:result.title,
-                episodeId,
-                openingCrawl,
-                releaseDate
+                    ...rest
+                } = result;
+
+                return {
+                    ...rest,
+                    resourceKey: result.title,
+                    episodeId,
+                    openingCrawl,
+                    releaseDate,
+                };
             }
-        });
+        );
 
-        yield put(fetchFilmsSuccess(mappedResults, previous, next))
+        yield put(fetchFilmsSuccess(mappedResults, previous, next));
     } catch (error) {
-        yield put(fetchFilmsFailure(error))
+        yield put(fetchFilmsFailure(error));
     }
-
 }
 
 function* watchRequests() {

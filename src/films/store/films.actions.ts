@@ -1,7 +1,5 @@
-
-import { IError } from "../../planets/interfaces/error.interface";
-import { IFilm } from "../interfaces/film.interface";
-
+import { IError } from '../../planets/interfaces/error.interface';
+import { IFilm } from '../interfaces/film.interface';
 
 export enum FilmsActionTypes {
     FETCH_FILMS = '[Films] Fetch Films',
@@ -10,46 +8,49 @@ export enum FilmsActionTypes {
 }
 
 export interface IFetchFilms {
-    type: typeof FilmsActionTypes.FETCH_FILMS,
-    payload: {page: number, search: string}
+    type: typeof FilmsActionTypes.FETCH_FILMS;
+    payload: { page: number; search: string };
 }
 
 export interface IFetchFilmsSuccess {
-    type: typeof FilmsActionTypes.FETCH_FILMS_SUCCESS,
-    payload: {films: IFilm[], prev: string, next: string}
+    type: typeof FilmsActionTypes.FETCH_FILMS_SUCCESS;
+    payload: { films: IFilm[]; prev: string; next: string };
 }
 
 export interface IFetchFilmsFailure {
-    type: typeof FilmsActionTypes.FETCH_FILMS_FAILURE,
-    payload: {error: IError}
+    type: typeof FilmsActionTypes.FETCH_FILMS_FAILURE;
+    payload: { error: IError };
 }
-
 
 export const fetchFilms = (page: number, search: string): IFetchFilms => {
     return {
         type: FilmsActionTypes.FETCH_FILMS,
-        payload: {page, search},
-    }
-}
+        payload: { page, search },
+    };
+};
 
-export const fetchFilmsSuccess = (films: IFilm[], prev: string, next: string): IFetchFilmsSuccess => {
+export const fetchFilmsSuccess = (
+    films: IFilm[],
+    prev: string,
+    next: string
+): IFetchFilmsSuccess => {
     return {
         type: FilmsActionTypes.FETCH_FILMS_SUCCESS,
         payload: {
             films,
             prev,
-            next
-        }
-    }
-}
+            next,
+        },
+    };
+};
 
 export const fetchFilmsFailure = (error: IError) => {
     return {
         type: FilmsActionTypes.FETCH_FILMS_FAILURE,
         payload: {
-            error
-        }
-    }
-}
+            error,
+        },
+    };
+};
 
 export type FilmsAction = IFetchFilms | IFetchFilmsSuccess | IFetchFilmsFailure;

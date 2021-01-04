@@ -1,48 +1,48 @@
-import { IPlanet } from "../interfaces/planet.interface";
-import { PlanetsAction, PlanetsActionTypes } from "./planets.actions";
+import { IPlanet } from '../interfaces/planet.interface';
+import { PlanetsAction, PlanetsActionTypes } from './planets.actions';
 
 export interface IPlanetsState {
-    planets: IPlanet[],
-    hasNextPage: boolean,
-    hasPrevPage: boolean,
-    isFetching: boolean
+    planets: IPlanet[];
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+    isFetching: boolean;
 }
 
 export interface IPlanetsAwareState {
-    planetsReducer: IPlanetsState
+    planetsReducer: IPlanetsState;
 }
 
 const initialState: IPlanetsState = {
     planets: [],
     hasPrevPage: false,
     hasNextPage: true,
-    isFetching: false
-}
+    isFetching: false,
+};
 
 const reducer = (state = initialState, action: PlanetsAction) => {
-    switch(action.type) {
+    switch (action.type) {
         case PlanetsActionTypes.FETCH_PLANETS:
             return {
                 ...state,
-                isFetching: true
-            }
+                isFetching: true,
+            };
         case PlanetsActionTypes.FETCH_PLANETS_SUCCESS:
             const { planets, prev, next } = action.payload;
             return {
                 ...state,
                 planets,
-                hasPrevPage: !!prev ,
+                hasPrevPage: !!prev,
                 hasNextPage: !!next,
-                isFetching: false
-            }
+                isFetching: false,
+            };
         case PlanetsActionTypes.FETCH_PLANETS_FAILURE:
             return {
                 ...state,
-                isFetching: false
-            }
+                isFetching: false,
+            };
         default:
             return state;
     }
-}
+};
 
 export default reducer;

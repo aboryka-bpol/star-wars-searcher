@@ -1,48 +1,48 @@
-import { ISpaceship } from "../interfaces/spaceship.interface";
-import { SpaceshipsAction, SpaceshipsActionTypes } from "./spaceships.actions";
+import { ISpaceship } from '../interfaces/spaceship.interface';
+import { SpaceshipsAction, SpaceshipsActionTypes } from './spaceships.actions';
 
 export interface ISpaceshipsState {
-    spaceships: ISpaceship[],
-    hasNextPage: boolean,
-    hasPrevPage: boolean,
-    isFetching: boolean
+    spaceships: ISpaceship[];
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+    isFetching: boolean;
 }
 
 export interface ISpaceshipsAwareState {
-    spaceshipsReducer: ISpaceshipsState
+    spaceshipsReducer: ISpaceshipsState;
 }
 
 const initialState: ISpaceshipsState = {
     spaceships: [],
     hasPrevPage: false,
     hasNextPage: true,
-    isFetching: false
-}
+    isFetching: false,
+};
 
 const reducer = (state = initialState, action: SpaceshipsAction) => {
-    switch(action.type) {
+    switch (action.type) {
         case SpaceshipsActionTypes.FETCH_SPACESHIPS:
             return {
                 ...state,
-                isFetching: true
-            }
+                isFetching: true,
+            };
         case SpaceshipsActionTypes.FETCH_SPACESHIPS_SUCCESS:
             const { spaceships, prev, next } = action.payload;
             return {
                 ...state,
                 spaceships,
-                hasPrevPage: !!prev ,
+                hasPrevPage: !!prev,
                 hasNextPage: !!next,
-                isFetching: false
-            }
+                isFetching: false,
+            };
         case SpaceshipsActionTypes.FETCH_SPACESHIPS_FAILURE:
             return {
                 ...state,
-                isFetching: false
-            }
+                isFetching: false,
+            };
         default:
             return state;
     }
-}
+};
 
 export default reducer;
