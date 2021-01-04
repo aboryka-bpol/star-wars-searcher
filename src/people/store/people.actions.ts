@@ -1,4 +1,4 @@
-import { IError } from '../../planets/interfaces/error.interface';
+import { IError } from '../../shared/interfaces/error.interface';
 import { IPerson } from '../interfaces/people.interface';
 
 export enum PeopleActionTypes {

@@ -1,4 +1,4 @@
-import { IError } from '../../planets/interfaces/error.interface';
+import { IError } from '../../shared/interfaces/error.interface';
 import { IVehicle } from '../interfaces/vehicle.interface';
 
 export enum VehiclesActionTypes {

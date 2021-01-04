@@ -1,4 +1,4 @@
-import { IError } from '../../planets/interfaces/error.interface';
+import { IError } from '../../shared/interfaces/error.interface';
 import { ISpaceship } from '../interfaces/spaceship.interface';
 
 export enum SpaceshipsActionTypes {

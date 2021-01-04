@@ -1,4 +1,4 @@
-import { IError } from '../../planets/interfaces/error.interface';
+import { IError } from '../../shared/interfaces/error.interface';
 import { IFilm } from '../interfaces/film.interface';
 
 export enum FilmsActionTypes {
